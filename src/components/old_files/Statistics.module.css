@@ -1,0 +1,46 @@
+.statistics {
+  width: auto;
+  height: auto;
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 5px;
+  background-color: rgb(240, 255, 255);
+  justify-content: center;
+  text-align: center;
+  box-shadow: 8px 8px 24px 2px rgba(112, 93, 93, 0.2);
+}
+
+.title {
+  text-transform: uppercase;
+}
+
+.statList {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+}
+
+.stetItem {
+  list-style: none;
+  width: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stetItem:first-child {
+  border-bottom-left-radius: 5px;
+}
+
+.stetItem:last-child {
+  border-bottom-right-radius: 5px;
+}
+
+.stetItem:nth-child(odd) {
+  background-color: blue;
+  color: white;
+}
+
+.stetItem:nth-child(even) {
+  background-color: yellow;
+}

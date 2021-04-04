@@ -1,0 +1,52 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modalBody {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  padding: 5px 5px;
+  width: 300px;
+  border: 2px solid gray;
+  border-radius: 5px;
+  background: white;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 5px;
+}
+
+.btn {
+  padding-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input {
+  width: 100%;
+}
+
+button {
+  width: 150px;
+}
+
+.btnDelete {
+  width: auto;
+  height: 20px;
+  border-radius: 5px;
+  margin-left: 10px;
+}

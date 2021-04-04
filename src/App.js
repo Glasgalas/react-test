@@ -1,17 +1,10 @@
-import "./App.css";
-import Profile from "./components/profile";
-import Statistics from "./components/statistics";
-import user from "./user.json";
-import statisticalData from "./statistical-data.json";
-import FriendList from "./components/friendlist-item";
-import friends from "./friends.json";
+import './App.css';
+import Menu from './components/Menu';
 
 function App() {
   return (
-    <div>
-      <Profile {...user} />
-      <Statistics stats={statisticalData} />
-      <FriendList friends={friends} />
+    <div className="body">
+      <Menu />
     </div>
   );
 }
