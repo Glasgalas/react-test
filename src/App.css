@@ -3,17 +3,24 @@
   padding-bottom: 20px;
   display: flex;
 }
+/* body {
+  background: #212129;
+} */
+/* ::selection {
+  background: #212129;
+} */
 
 .menu {
   display: flex;
 }
 
 nav > a {
+  text-transform: uppercase;
   display: block;
   padding: 10px 15px;
   font-size: 120%;
   text-decoration: none;
   border-bottom: solid 1px #eee;
-  color: rgb(0, 0, 238);
+  color: rgb(23, 223, 179);
   margin-right: 100px;
 }

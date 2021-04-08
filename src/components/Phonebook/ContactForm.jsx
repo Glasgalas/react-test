@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import shortid from 'shortid';
-import styles from './Modal.module.css';
+import s from './ContactForm.module.css';
 
 const initialState = {
   id: shortid.generate(),
@@ -42,30 +44,25 @@ const ContactForm = ({ contacts, onSubmit }) => {
     }));
   };
 
-  const handleModalOpen = e => {
-    setState(prev => ({
-      ...prev,
-      isOpen: true,
-    }));
-  };
-
-  const handleModalClose = e => {
-    setState(prev => ({
-      ...prev,
-      isOpen: false,
+  const toggleModal = () => {
+    setState(({ isOpen }) => ({
+      isOpen: !isOpen,
     }));
   };
 
   return (
     <>
-      <button onClick={handleModalOpen}>Add contact</button>
+      <button className={s.btn} onClick={toggleModal}>
+        Add contact
+      </button>
       {isOpen && (
-        <div className={styles.modal}>
-          <div className={styles.modalBody}>
-            <form onSubmit={handleSubmit} className={styles.form}>
-              <label className={styles.label}>
+        <div className={s.modal}>
+          <div className={s.modalBody}>
+            <form onSubmit={handleSubmit} className={s.form}>
+              <label className={s.label}>
                 <span>Name:</span>
                 <input
+                  className={s.input}
                   type="text"
                   name="name"
                   value={name}
@@ -79,6 +76,7 @@ const ContactForm = ({ contacts, onSubmit }) => {
               <label>
                 <span>Phone number:</span>
                 <input
+                  className={s.input}
                   type="tel"
                   name="phoneNumber"
                   value={phoneNumber}
@@ -88,9 +86,13 @@ const ContactForm = ({ contacts, onSubmit }) => {
                   onChange={handleChange}
                 />
               </label>
-              <div className={styles.btn}>
-                <button type="submit">Add contact</button>
-                <button onClick={handleModalClose}>Cancel</button>
+              <div className={s.buttons}>
+                <button className={s.btn} type="submit">
+                  Add contact
+                </button>
+                <button className={s.btn} onClick={toggleModal}>
+                  Cancel
+                </button>
               </div>
             </form>
           </div>
@@ -98,6 +100,11 @@ const ContactForm = ({ contacts, onSubmit }) => {
       )}
     </>
   );
+};
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  contacts: PropTypes.array.isRequired,
 };
 
 export default ContactForm;

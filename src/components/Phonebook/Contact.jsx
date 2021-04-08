@@ -1,17 +1,15 @@
 import PropTypes from 'prop-types';
-import styles from './Modal.module.css';
+import s from './Contact.module.css';
 
 const Contact = ({ contact, onDeleteContact }) => {
   const { name, phoneNumber, id } = contact;
   return (
-    <li key={id} className="item">
-      <span className="name"> {name}: </span>
-      <span className="phoneNumber"> {phoneNumber}</span>
-      <button
-        className={styles.btnDelete}
-        type="button"
-        onClick={onDeleteContact}
-      >
+    <li key={id} className={s.item}>
+      <div className={s.wrapper}>
+        <span className={s.name}> {name}: </span>
+        <span className={s.phoneNumber}> {phoneNumber}</span>
+      </div>
+      <button className={s.btnDelete} type="button" onClick={onDeleteContact}>
         delete
       </button>
     </li>
@@ -20,8 +18,9 @@ const Contact = ({ contact, onDeleteContact }) => {
 
 Contact.propTypes = {
   contact: PropTypes.shape({
-    name: PropTypes.string,
-    phoneNumber: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    phoneNumber: PropTypes.string.isRequired,
   }),
 };
 

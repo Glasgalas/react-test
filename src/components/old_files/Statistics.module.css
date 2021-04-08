@@ -13,6 +13,10 @@
   text-transform: uppercase;
 }
 
+/* nav {
+  text-transform: uppercase;
+} */
+
 .statList {
   display: flex;
   flex-direction: row;
