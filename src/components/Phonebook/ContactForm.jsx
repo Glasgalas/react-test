@@ -3,17 +3,28 @@ import PropTypes from 'prop-types';
 
 import shortid from 'shortid';
 import s from './ContactForm.module.css';
+import AddIcon from '@material-ui/icons/Add';
+import CancelIcon from '@material-ui/icons/Cancel';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import Button from '@material-ui/core/Button';
 
 const initialState = {
   id: shortid.generate(),
   name: '',
   phoneNumber: '',
   isOpen: false,
+  show: false,
 };
 
-const ContactForm = ({ contacts, onSubmit }) => {
+const ContactForm = ({
+  contacts,
+  onSubmit,
+  showInput,
+  onChangeShow,
+  onChangeInput,
+}) => {
   const [state, setState] = useState(initialState);
-  const { name, phoneNumber, isOpen } = state;
+  const { name, phoneNumber, isOpen, show } = state;
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -31,10 +42,12 @@ const ContactForm = ({ contacts, onSubmit }) => {
     if (checkName) {
       alert(`Contact witn name ${name} already exists`);
       setState(initialState);
+      onChangeShow();
       return;
     }
     onSubmit(newContact);
     setState(initialState);
+    onChangeShow();
   };
 
   const handleChange = e => {
@@ -45,24 +58,40 @@ const ContactForm = ({ contacts, onSubmit }) => {
   };
 
   const toggleModal = () => {
-    setState(({ isOpen }) => ({
+    if (showInput) {
+      setState({ show: false });
+    }
+    setState({
+      id: shortid.generate(),
+      name: '',
+      phoneNumber: '',
       isOpen: !isOpen,
-    }));
+      show: !show,
+    });
+    onChangeShow();
   };
 
   return (
     <>
-      <button className={s.btn} onClick={toggleModal}>
-        Add contact
-      </button>
-      {isOpen && (
-        <div className={s.modal}>
-          <div className={s.modalBody}>
+      <Button
+        className={s.btn}
+        onClick={!showInput || show ? toggleModal : onChangeInput}
+        color="primary"
+        variant="outlined"
+      >
+        <AddIcon className={s.icon} />
+      </Button>
+
+      <div className={s.modal}>
+        <div
+          className={isOpen ? [s.modalBody, s.active].join(' ') : s.modalBody}
+        >
+          <div>
             <form onSubmit={handleSubmit} className={s.form}>
               <label className={s.label}>
-                <span>Name:</span>
                 <input
                   className={s.input}
+                  placeholder="Name"
                   type="text"
                   name="name"
                   value={name}
@@ -74,11 +103,11 @@ const ContactForm = ({ contacts, onSubmit }) => {
               </label>
 
               <label>
-                <span>Phone number:</span>
                 <input
                   className={s.input}
                   type="tel"
                   name="phoneNumber"
+                  placeholder="Phone number"
                   value={phoneNumber}
                   pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
                   title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
@@ -87,17 +116,27 @@ const ContactForm = ({ contacts, onSubmit }) => {
                 />
               </label>
               <div className={s.buttons}>
-                <button className={s.btn} type="submit">
-                  Add contact
-                </button>
-                <button className={s.btn} onClick={toggleModal}>
-                  Cancel
-                </button>
+                <Button
+                  color="primary"
+                  variant="outlined"
+                  className={s.btn}
+                  type="submit"
+                >
+                  <PersonAddIcon className={s.icon} />
+                </Button>
+                <Button
+                  color="primary"
+                  variant="outlined"
+                  className={s.btn}
+                  onClick={toggleModal}
+                >
+                  <CancelIcon className={s.icon} />
+                </Button>
               </div>
             </form>
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };

@@ -1,5 +1,8 @@
 import PropTypes from 'prop-types';
 import s from './Contact.module.css';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button';
+import PhoneEnabledIcon from '@material-ui/icons/PhoneEnabled';
 
 const Contact = ({ contact, onDeleteContact }) => {
   const { name, phoneNumber, id } = contact;
@@ -7,11 +10,21 @@ const Contact = ({ contact, onDeleteContact }) => {
     <li key={id} className={s.item}>
       <div className={s.wrapper}>
         <span className={s.name}> {name}: </span>
-        <span className={s.phoneNumber}> {phoneNumber}</span>
+        <span className={s.phoneNumber}>
+          <a className={s.phoneNumberLink} href="tel:{phoneNumber}">
+            {phoneNumber} <PhoneEnabledIcon />
+          </a>
+        </span>
       </div>
-      <button className={s.btnDelete} type="button" onClick={onDeleteContact}>
-        delete
-      </button>
+      <Button
+        className={s.btnDelete}
+        onClick={onDeleteContact}
+        type="button"
+        color="primary"
+        variant="outlined"
+      >
+        <DeleteIcon className={s.icon} />
+      </Button>
     </li>
   );
 };

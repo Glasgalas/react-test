@@ -14,9 +14,9 @@ const Search = () => {
   const { searchActive, request } = state;
 
   const handleSearchToggle = () => {
-    setState(({ searchActive }) => ({
+    setState({
       searchActive: !searchActive,
-    }));
+    });
     if (searchActive) {
       setSearch(search => (search = ''));
     }
@@ -28,7 +28,10 @@ const Search = () => {
 
   const handleSearchRequest = e => {
     console.log(search);
-    setState(({ request }) => ({ request: !request }));
+    setState({ request: !request });
+    if (searchActive) {
+      setSearch(search => (search = ''));
+    }
   };
 
   return (
@@ -50,9 +53,7 @@ const Search = () => {
             className={s.searchIcon}
             onClick={searchActive ? handleSearchRequest : handleSearchToggle}
           >
-            <span className={s.span}>
-              <span className={s.span2}></span>
-            </span>
+            <span className={s.span}></span>
           </button>
         </div>
         <span className={s.close} onClick={handleSearchToggle}></span>

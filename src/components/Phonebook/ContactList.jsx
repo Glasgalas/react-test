@@ -1,19 +1,35 @@
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Contact from './Contact';
 import s from './ContactList.module.css';
 
+const initialState = {
+  showMore: false,
+};
 const ContactList = ({ contacts, onDeleteContact }) => {
+  const [state, setState] = useState(initialState);
+  const { showMore } = state;
+
+  const toggleShow = () => {
+    setState({
+      showMore: !showMore,
+    });
+  };
+
   return (
-    <ul className={s.ul}>
+    <>
       <h2>Contacts</h2>
-      {contacts.map(contact => (
-        <Contact
-          key={contact.id}
-          contact={contact}
-          onDeleteContact={() => onDeleteContact(contact.id)}
-        />
-      ))}
-    </ul>
+
+      <ul className={s.ul}>
+        {contacts.map(contact => (
+          <Contact
+            key={contact.id}
+            contact={contact}
+            onDeleteContact={() => onDeleteContact(contact.id)}
+          />
+        ))}
+      </ul>
+    </>
   );
 };
 

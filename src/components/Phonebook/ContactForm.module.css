@@ -1,25 +1,38 @@
 .modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.5);
+  /* top: 0; */
+  /* right: 0; */
+  /* background: rgba(0, 0, 0, 0.5); */
 }
 
 .modalBody {
   position: absolute;
-  top: 20%;
-  left: 40%;
-  padding: 5px 5px;
+  opacity: 0;
+  left: 100px;
+
+  top: -5px;
+  /* left: -100%; */
+  overflow: hidden;
+
+  width: 0;
+
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0);
+  height: 30px;
+  transition: all 0.3s ease-in-out;
+  /* display: flex; */
+  /* flex-direction: column;
+  justify-content: center; */
+}
+
+.modalBody.active {
+  opacity: 1;
   width: 300px;
-  border: 2px solid gray;
-  border-radius: 5px;
-  background: white;
+  /* left: 0; */
   height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background: rgba(33, 33, 41, 1.1);
+  color: rgb(18, 233, 215);
+  transition: all 0.5s cubic-bezier(0, 0.105, 0.035, 1.57);
 }
 
 .label {
@@ -30,16 +43,35 @@
 }
 
 .input {
+  padding-left: 10px;
+  padding-right: 5px;
+  outline: none;
   width: 100%;
+  height: 36px;
+  background: rgb(33, 33, 41);
+  color: rgb(18, 233, 215);
+  border: 1px solid rgba(63, 81, 181, 0.5);
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+.input:focus,
+.input:hover {
+  border: 1px solid #3f51b5;
+}
+.input::placeholder {
+  /* padding-left: 10px; */
+  background-color: rgb(33, 33, 41);
 }
 
 .buttons {
+  outline: none;
   padding-top: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.btn {
-  width: 120px;
+.btn:hover .icon {
+  fill: rgb(23, 223, 179);
+  width: auto;
 }

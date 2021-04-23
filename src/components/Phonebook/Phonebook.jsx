@@ -13,10 +13,42 @@ const savedContacts = [
   { id: 'id-4', name: 'Annie Copeland', phoneNumber: '227-91-26' },
 ];
 
+const closeInputOrForm = {
+  closeInput: false,
+  closeForm: false,
+};
+
 const Contacts = () => {
+  const [showInput, setShowInput] = useState(false);
+  const handleShow = () => {
+    setShowInput(!showInput);
+  };
+
   const [contacts, setContacts] = useState(savedContacts);
   const [filter, setFilter] = useState('');
   const firstUse = useRef(true);
+
+  const [close, setClose] = useState(closeInputOrForm);
+  const { closeInput, closeForm } = close;
+  const onCloseInput = () => {
+    if (showInput && closeInput) {
+      alert('Please close the contact search box first');
+    }
+    setClose({
+      closeInput: true,
+      closeForm: false,
+    });
+  };
+
+  const onCloseForm = () => {
+    if (showInput && closeForm) {
+      alert('Please close the contact search box first');
+    }
+    setClose({
+      closeInput: false,
+      closeForm: true,
+    });
+  };
 
   useEffect(() => {
     if (firstUse.current) {
@@ -57,8 +89,23 @@ const Contacts = () => {
 
   return (
     <div className={s.phonebook}>
-      <ContactForm onSubmit={handleAddContact} contacts={contacts} />
-      <Filter value={filter} onChange={handleFilter} />
+      <div className={s.wrap}>
+        <Filter
+          value={filter}
+          onChange={handleFilter}
+          showInput={showInput}
+          onChangeShow={handleShow}
+          onChangeForm={onCloseForm}
+        />
+
+        <ContactForm
+          onSubmit={handleAddContact}
+          contacts={contacts}
+          showInput={showInput}
+          onChangeShow={handleShow}
+          onChangeInput={onCloseInput}
+        />
+      </div>
       <ContactList
         contacts={visibleContacts}
         onDeleteContact={handleDeleteContact}
