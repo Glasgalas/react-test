@@ -5,7 +5,7 @@ import s from './ContactForm.module.css';
 import shortid from 'shortid';
 
 const initialState = {
-  id: shortid.generate(),
+  id: '',
   name: '',
   phoneNumber: '',
 };
